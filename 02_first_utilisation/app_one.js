@@ -8,4 +8,3 @@ new Vue({
         date: Date.now("d/m/YYYY") // Use object Date with method now() "timestamp"
     }
 });
-
