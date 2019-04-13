@@ -17,7 +17,27 @@
     <main id="app_main">
         <!-- APP-FOUR -->
         <div>
-
+            <fieldset>
+                <legend>Formulaire de saisie</legend>
+                <form action="">
+                    <label for="firstname">Firstname :</label>
+                    <input 
+                        type="text" name="firstname" id="firstname" 
+                        placeholder="Enter your Firstname" 
+                        v-model:value="firstname_value"
+                    >
+                    <span><small>Your Firstname is : <mark>{{ firstname_value }}</mark> </small></span>
+                    <br />
+                    <br />
+                    <label for="lastname">Lastname :</label>
+                    <input 
+                        type="text" name="lastname" id="lastname" 
+                        placeholder="Enter your Lastname"
+                        v-model:value="lastname_value"
+                    >
+                    <span><small>Your Lastname is : <mark>{{ lastname_value }}</mark></small></span>
+                </form>
+            </fieldset>
         </div> <!-- /APP-FOUR -->
     </main>
     <footer>

@@ -20,5 +20,7 @@ new Vue({
 new Vue({
     el: "#app_main",
     data: {
+        firstname_value: '',
+        lastname_value: '',
     }
 }); /* /APP_MAIN */
