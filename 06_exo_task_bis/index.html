@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Learning VueJS - 06 bis Exo Task</title>
+
+    <!-- development version, includes helpful console warnings -->
+    <!-- script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script -->
+    <!-- production version, optimized for size and speed -->
+    <!-- script src="https://cdn.jsdelivr.net/npm/vue"></script -->
+
+    <!-- SCRIPT_VUE_JS -->
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <header id="header_content">
+        <h1>{{ header_title }}</h1>
+    </header>
+    
+    <!-- APP_FIVE -->
+    <main id="app_five">
+        <p>{{ description }}</p>
+        <div>
+            <form v-on:submit.prevent="addTask()">
+                <label for="add_task">New task :</label>
+                <input type="text" name="add_task" id="add_task" placeholder="Add your task here..." v-model="task">
+                <button>click here for add your new task!</button>
+            </form>
+            <ul>
+                <li v-for="task in tasks">{{ task }}</li>
+            </ul>
+        </div>
+    </main> <!-- /APP_FIVE -->
+
+    <footer>
+        Footer
+    </footer>
+
+    <!-- SCRIPT_APP_FIVE -->
+    <script>
+
+        /* HEADER_CONTENT */
+        new Vue({
+            el: "#header_content",
+            data: {
+                header_title: "06 - Continuation of the task manager",
+            }
+        });
+
+        /* APP_ONE */
+        new Vue({
+            el: "#app_five",
+            data: {
+                description: "here, i delete a \"preventDefault\" and i have add the method \"prevent\" of vueJS for the same result than exercise 06.",
+                task: "",
+                tasks: [], // task table
+            },
+            methods: {
+                addTask: function() {
+                    this.tasks.push(this.task); // I push my new task in tasks table
+                    console.table(this.tasks);  // Show in the console tasks content
+                    this.task = "";             // I clear my input
+                }
+            }
+        });
+    </script>
+</body>
+</html>
