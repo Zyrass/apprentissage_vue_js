@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Learning VueJS - 05 Exo Task</title>
+
+    <!-- development version, includes helpful console warnings -->
+    <!-- script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script -->
+    <!-- production version, optimized for size and speed -->
+    <!-- script src="https://cdn.jsdelivr.net/npm/vue"></script -->
+
+    <!-- SCRIPT_VUE_JS -->
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <header id="header_content">
+        <h1>{{ header_title }}</h1>
+    </header>
+    
+    <!-- APP_FIVE -->
+    <main id="app_five">
+        <p title="FR: Lors de cet apprentissage, j'apprends à concevoir un gestionnaire de tâches avec VueJS.">
+            {{ description }}
+        </p>
+        <div>
+            <label for="add_task">New task :</label>
+            <input type="text" name="add_task" id="add_task" placeholder="Add your task here..." v-model="task">
+            <button v-on:click="addTask">click here for add your new task!</button>
+            <ul>
+                <li v-for="task in tasks">{{ task }}</li>
+            </ul>
+        </div>
+    </main> <!-- /APP_FIVE -->
+
+    <footer>
+        Footer
+    </footer>
+
+    <!-- SCRIPT_APP_FIVE -->
+    <script>
+
+        /* HEADER_CONTENT */
+        new Vue({
+            el: "#header_content",
+            data: {
+                header_title: "05 - Exercise Task",
+            }
+        });
+
+        /* APP_ONE */
+        new Vue({
+            el: "#app_five",
+            data: {
+                description: "On this part, we will create a task manager",
+                task: "",
+                tasks: [], // task table
+            },
+            methods: {
+                addTask: function() {
+                    this.tasks.push(this.task); // I push my new task in tasks table
+                    console.table(this.tasks);  // Show in the console tasks content
+                    this.task = "";             // I clear my input
+                }
+            }
+        });
+    </script>
+</body>
+</html>
