@@ -35,9 +35,10 @@
                 placeholder="Your task..." v-model="inputTask">
                 <button>Add your new task now!</button>
             </form>
-            <ul v-for="inputTask in tasks">
+            <ul>
                 <li>
-                    <div v-bind:class="{completed : inputTask.done}">
+                    <div v-for="inputTask in tasks" v-bind:class="{completed: inputTask.done}"
+                    class="info" v-on:click="inputTask.done = !inputTask.done">
                         <p>{{ inputTask.description }}</p>
                         <ul>
                             <li>Identifiant : <span>{{ inputTask.id }}</span></li>
@@ -70,7 +71,7 @@
             el: "#app_five",
             data: {
                 main_information: "On this section, we will add a css style, a click event on our list and an interaction occurs during the click and we will change the css style during this event.",
-                id: 1456467,
+                id: 1,
                 inputTask: null,
                 tasks: [],
             },
