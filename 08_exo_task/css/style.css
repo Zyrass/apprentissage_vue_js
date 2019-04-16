@@ -1,0 +1,38 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;    
+}
+
+/* UL LI */
+li {
+    list-style-type: none;
+    cursor: pointer;
+    color: #000;
+}
+
+/* CONTENT LI */
+.info {
+    width: 300px;
+    margin: 0 auto;
+    padding: 25px;
+}
+.info:hover {
+    border: 1px solid darkgreen;
+    transition: border 0.5s ease-in-out;
+}
+span {
+    font-weight: 700;
+    color: #000099;
+}
+.done {
+    color: #990000;
+}
+
+/* STATE */
+.completed {
+    color: darkgreen;
+    background-color: #eee;
+    text-decoration: line-through;
+}

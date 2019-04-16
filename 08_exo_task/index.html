@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Learning VueJS - XX - Continuation of the task manager</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- SCRIPT_VUE_JS -->
+    <script src="../assets/js/vue.js"></script>
+
+    <!-- SCRIPT_VUE_JS_CDN -->
+    <!-- development version, includes helpful console warnings -->
+    <!-- script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script -->
+    <!-- production version, optimized for size and speed -->
+    <!-- script src="https://cdn.jsdelivr.net/npm/vue"></script -->
+</head>
+<body>
+    
+    <!-- HEADER_CONTENT -->
+    <header id="header_content">
+        <h1>{{ header_title }}</h1>
+    </header>
+
+    <!-- APP_FIVE -->
+    <main id="app_five">
+        <p>{{ main_information }}</p>
+        <div>
+            <form action="" method="POST" v-on:submit.prevent="add_a_new_task">
+                <label for="new_task">New Task :</label>
+                <input type="text" id="new_task" name="postTask" 
+                placeholder="Your task..." v-model="inputTask">
+                <button>Add your new task now!</button>
+            </form>
+            <ul v-for="inputTask in tasks">
+                <li>
+                    <div v-bind:class="{completed : inputTask.done}">
+                        <p>{{ inputTask.description }}</p>
+                        <ul>
+                            <li>Identifiant : <span>{{ inputTask.id }}</span></li>
+                            <li>Timestamp : <span>{{ inputTask.date }}</span></li>
+                            <li>Done : <span class="done">{{ inputTask.done }}</span></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        Footer
+    </footer>
+
+    <!-- SCRIPT_APP_FIVE -->
+    <script>
+
+        /* HEADER_CONTENT */
+        new Vue({
+            el: "#header_content",
+            data: {
+                header_title: "08 - Continuation of the task manager",
+            }
+        });
+
+        /* APP_FIVE */
+        let myApp = new Vue({
+            el: "#app_five",
+            data: {
+                main_information: "On this section, we will add a css style, a click event on our list and an interaction occurs during the click and we will change the css style during this event.",
+                id: 1456467,
+                inputTask: null,
+                tasks: [],
+            },
+            methods: {
+                add_a_new_task: function() {
+                    
+                    this.tasks.push({
+                        id: this.id++,
+                        date: Date.now(),
+                        description: this.inputTask,
+                        done: false
+                    });
+                    this.inputTask = null;
+                }
+            },
+        });
+        
+    </script>
+</body>
+</html>
