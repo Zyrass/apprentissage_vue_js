@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Learning VueJS - 06 Training</title>
+
+    <!-- development version, includes helpful console warnings -->
+    <!-- script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script -->
+    <!-- production version, optimized for size and speed -->
+    <!-- script src="https://cdn.jsdelivr.net/npm/vue"></script -->
+
+    <!-- SCRIPT_VUE_JS -->
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <header id="header_content">
+        <h1>{{ header_title }}</h1>
+    </header>
+    
+    <!-- APP_FIVE -->
+    <main id="app_five">
+        <p>{{ description }}</p>
+        <div>
+            <form v-on:submit.prevent="newTask()" action="">
+                <input type="text" v-model="task_content"/>
+                <button>click on this button for add your new task!</button>
+            </form>
+            <ul>
+                <li v-for="task_content in tasks">{{ task_content }}</li>
+            </ul>
+        </div>
+    </main> <!-- /APP_FIVE -->
+
+    <footer>
+        Footer
+    </footer>
+
+    <!-- SCRIPT_APP_FIVE -->
+    <script>
+
+        /* HEADER_CONTENT */
+        new Vue({
+            el: "#header_content",
+            data: {
+                header_title: "06 - Training",
+            }
+        });
+
+        /* APP_FIVE */
+        new Vue({
+            el: '#app_five',
+            data: {
+                description: "It's my first training with a day without a code.",
+                task_content: '',
+                tasks: [],
+            },
+            methods: {
+                newTask: function() {
+                    this.tasks.push(this.task_content);
+                    console.table(this.tasks);
+                    this.task_content = '';
+                }
+            },
+        });
+    </script>
+</body>
+</html>
