@@ -65,14 +65,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="task in tasks" @click="task.done = !task.done">
+                    <tr v-for="task in tasks">
                         <th :class="{completed: task.done}">{{ task.id }}</th>
-                        <td :class="{completed: task.done}">{{ task.title }}</td>
+                        <td>
+                            <span :class="{completed: task.done}">{{ task.title }}</span>
+                        </td>
                         <td :class="{completed: task.done}">{{ task.description }}</td>
                         <td :class="{completed: task.done}">{{ task.timestamp }}</td>
                         <td :class="{completed: task.done}">
-                            <button class="btn_todo" v-if="!task.done">Todo...</button>
-                            <button class="btn_completed" v-else>Completed !</button>                        
+                            <button class="btn_todo" 
+                                    v-if="!task.done"
+                                    @click="task.done = !task.done"
+                            >Todo...</button>
+                            <button class="btn_completed"
+                                    v-else
+                                    @click="task.done = !task.done">Completed !</button>                        
                         </td>
                     </tr>
                 </tbody>
@@ -149,6 +156,7 @@
                         timestamp: Date.now(),
                         status: this.status,
                         done: false,
+                        edit_mode: false
                     });
                     this.titleTask = '';
                     this.descriptionTask = '';
