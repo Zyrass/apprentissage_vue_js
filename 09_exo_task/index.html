@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Learning VueJS - XX - Continuation of the task manager</title>
+
+    <!-- development version, includes helpful console warnings -->
+    <!-- script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script -->
+    <!-- production version, optimized for size and speed -->
+    <!-- script src="https://cdn.jsdelivr.net/npm/vue"></script -->
+
+    <!-- SCRIPT_VUE_JS -->
+    <script src="../assets/js/vue.js"></script>
+
+    <style>
+        
+        .btn_todo {
+            background-color: darkred;
+            color: #fff;
+        }
+        .btn_completed {
+            background-color: darkgreen;
+            color: #fff;
+        }
+        .completed {
+            text-decoration: line-through;
+            background-color: grey;
+        }
+
+    </style>
+
+</head>
+<body>
+    <header id="header_content">
+        <h1>{{ header_title }} <button @click="translate_title">{{ title_btn }}</button></h1>
+        <p>{{ header_description }} <button @click="translate_description">{{ description_btn }}</button></p>
+    </header>
+    
+    <!-- APP_FIVE -->
+    <main id="app_five">
+        <div>
+            <form @submit.prevent="addTask" action="marjo.php" method="POST">
+                
+                <label for="title_newTask">Title of the task :</label>
+                <input type="text" id="title_newTask" placeholder="Title here ..." 
+                v-model="titleTask" required="required">
+
+                <label for="description_newTask">Description of the task :</label>
+                <input type="text" id="description_newTask" placeholder="Description here ..." 
+                v-model="descriptionTask" required="required">
+
+                <button>click here for add your new task!</button>
+            </form>
+                    
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Timestamp</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="task in tasks" @click="task.done = !task.done">
+                        <th :class="{completed: task.done}">{{ task.id }}</th>
+                        <td :class="{completed: task.done}">{{ task.title }}</td>
+                        <td :class="{completed: task.done}">{{ task.description }}</td>
+                        <td :class="{completed: task.done}">{{ task.timestamp }}</td>
+                        <td :class="{completed: task.done}">
+                            <button class="btn_todo" v-if="!task.done">Todo...</button>
+                            <button class="btn_completed" v-else>Completed !</button>                        
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+                    
+        </div>
+    </main> <!-- /APP_FIVE -->
+
+    <footer>
+        Footer
+    </footer>
+
+    <!-- SCRIPT_APP_FIVE -->
+    <script>
+
+        /* HEADER_CONTENT */
+        new Vue({
+            el: "#header_content",
+            data: {
+                header_title: "09 - Continuation of the task manager",
+                title_btn: 'FR',
+                title_language: 'ENG',
+                header_description: "On this part, i has add a condition for showing of informations of the current task.",
+                description_btn: 'FR',
+                description_language: 'ENG'
+            },
+            methods: {
+                translate_title() {
+                    if (this.title_language == 'ENG') {
+                        this.header_title = "09 - Suite du gestionnaire de tâches";
+                        this.title_btn = 'ENG';
+                        this.title_language = 'FR'
+                    } else {
+                        this.header_title = "09 - Continuation of the task manager"
+                        this.title_btn = 'FR';
+                        this.title_language = 'ENG'
+                    }
+                },
+                translate_description() {
+                    switch (this.description_language) {
+                        case 'ENG':
+                            this.header_description = "Sur cette partie, j'ai ajouté une condition pour afficher les informations de la tâche courante."
+                            this.description_btn = 'ENG';
+                            this.description_language = 'FR';
+                            break;
+                    
+                        default:
+                            this.header_description = "On this part, i has add a condition for showing of informations of the current task.";
+                            this.description_btn = 'FR';
+                            this.description_language = 'ENG';
+                            break;
+                    }
+                }
+            }
+        });
+
+        /* APP_FIVE */
+        let vm = new Vue({
+            el: "#app_five",
+            data: {
+                id: 1,
+                titleTask: null,
+                descriptionTask: null,
+                status: 'Todo...',
+                task: null,
+                tasks: [],            
+            },
+            methods: {
+                addTask: function() {
+                    this.tasks.push({
+                        id: this.id++,
+                        title: this.titleTask,
+                        description: this.descriptionTask,
+                        timestamp: Date.now(),
+                        status: this.status,
+                        done: false,
+                    });
+                    this.titleTask = '';
+                    this.descriptionTask = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
